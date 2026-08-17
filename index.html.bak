@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🕷️ SPIDER Generator - Web Edition</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕷️</text></svg>">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">🕷️</div>
+            <h1>SPIDER <span>Generator</span></h1>
+            <div class="status-badge" id="statusBadge">● Ready</div>
+        </header>
+
+        <div class="main-grid">
+            <!-- Control Panel -->
+            <div class="panel control-panel">
+                <h2>⚙️ Controls</h2>
+                <form id="generatorForm">
+                    <div class="form-group">
+                        <label for="region">Region</label>
+                        <select id="region" name="region">
+                            <option value="IND">🇮🇳 IND</option>
+                            <option value="ID">🇮🇩 ID</option>
+                            <option value="TH">🇹🇭 TH</option>
+                            <option value="ME">🇦🇪 ME</option>
+                            <option value="EUROPE">🇪🇺 EUROPE</option>
+                            <option value="VN">🇻🇳 VN</option>
+                            <option value="BD">🇧🇩 BD</option>
+                            <option value="PK">🇵🇰 PK</option>
+                            <option value="TW">🇹🇼 TW</option>
+                            <option value="RU">🇷🇺 RU</option>
+                            <option value="NA">🇺🇸 NA</option>
+                            <option value="SAC">🇦🇷 SAC</option>
+                            <option value="BR">🇧🇷 BR</option>
+                            <option value="SG">🇸🇬 SG</option>
+                            <option value="US">🇺🇸 US</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="nickname">Nickname Prefix</label>
+                        <input type="text" id="nickname" name="nickname" value="SPIDER" maxlength="7">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password Prefix</label>
+                        <input type="text" id="password" name="password" value="SPIDY">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group half">
+                            <label for="total">Total Accounts</label>
+                            <input type="number" id="total" name="total" value="100" min="1">
+                        </div>
+                        <div class="form-group half">
+                            <label for="threads">Threads</label>
+                            <input type="number" id="threads" name="threads" value="50" min="1" max="100">
+                        </div>
+                    </div>
+
+                    <div class="form-group checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="ghost" name="ghost">
+                            <span>👻 Ghost Mode</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="autoActivate" name="auto_activate" checked>
+                            <span>⚡ Auto Activate</span>
+                        </label>
+                    </div>
+
+                    <div class="button-group">
+                        <button type="submit" id="startBtn" class="btn primary">▶ Start Generation</button>
+                        <button type="button" id="stopBtn" class="btn danger" disabled>⏹ Stop</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Stats Panel -->
+            <div class="panel stats-panel">
+                <h2>📊 Statistics</h2>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-label">Generated</span>
+                        <span class="stat-value" id="statGenerated">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Rare</span>
+                        <span class="stat-value rare" id="statRare">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Couples</span>
+                        <span class="stat-value couple" id="statCouples">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Errors</span>
+                        <span class="stat-value error" id="statErrors">0</span>
+                    </div>
+                </div>
+                <div class="progress-container">
+                    <div class="progress-bar" id="progressBar" style="width: 0%"></div>
+                    <span class="progress-text" id="progressText">0%</span>
+                </div>
+                <div class="status-text" id="statusText">Ready to generate</div>
+            </div>
+        </div>
+
+        <!-- Logs Panel -->
+        <div class="panel logs-panel">
+            <div class="logs-header">
+                <h2>📋 Live Logs</h2>
+                <button id="clearLogsBtn" class="btn small">Clear</button>
+            </div>
+            <div class="logs-container" id="logsContainer">
+                <div class="log-entry info">🕷️ SPIDER Generator Web Edition ready</div>
+                <div class="log-entry info">📡 Waiting for commands...</div>
+            </div>
+        </div>
+
+        <!-- Accounts Panel -->
+        <div class="panel accounts-panel">
+            <div class="logs-header">
+                <h2>📁 Generated Accounts</h2>
+                <button id="refreshAccountsBtn" class="btn small">🔄 Refresh</button>
+            </div>
+            <div class="accounts-container" id="accountsContainer">
+                <div class="empty-state">No accounts generated yet</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
